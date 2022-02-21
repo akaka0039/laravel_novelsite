@@ -19,7 +19,9 @@ Route::get('/', function () {
 });
 
 //Laravel8からルーティングの描き方が変わっている
-Route::get('/hello',[HelloController::class,'hello']);
+Route::get('/hello', [HelloController::class, 'hello']);
+
+Route::get('/hello2', [HelloController::class, 'hello2']);
 
 Auth::routes();
 

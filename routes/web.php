@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TestController;
 use App\Http\Controllers\HelloController;
 
 /*
@@ -18,11 +19,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
 //Laravel8からルーティングの描き方が変わっている
 Route::get('/hello', [HelloController::class, 'hello']);
 
 Route::get('/hello2', [HelloController::class, 'hello2']);
 
-Auth::routes();
+Route::get('index', [TestController::class, 'index']);
 
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+require __DIR__ . '/auth.php';

@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 class TestController extends Controller
 {
+
+
+    // 小説家になろうのAPIのテスト
     public function index()
     {
 

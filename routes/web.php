@@ -35,6 +35,15 @@ Route::get('/', [
     'index'
 ])->name('index');
 
+Route::get('/', [
+    UserController::class,
+    'index'
+])->name('index');
+
+Route::get('/writer', function () {
+    return view('writer');
+})->middleware(['auth'])->name('dashboard');
+
 //Laravel8からルーティングの描き方が変わっている
 Route::get('/hello', [HelloController::class, 'hello']);
 

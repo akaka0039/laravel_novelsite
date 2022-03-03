@@ -16,6 +16,7 @@ class CreateNovelsTable extends Migration
         Schema::create('novels', function (Blueprint $table) {
             $table->id();
             $table->integer('novel_id');
+            $table->string('novel_title');
             $table->text('information');
             $table->text('sentence');
             $table->integer('type')->nullable();

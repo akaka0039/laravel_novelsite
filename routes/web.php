@@ -23,9 +23,9 @@ use App\Http\Controllers\UserController;
 //     return view('welcome');
 // });
 
-// Route::get('/', function () {
-//     return view('dashboard');
-// })->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
 // Route::prefix('cart')->middleware(['auth:users'])->group(function ()
 
@@ -35,14 +35,28 @@ Route::get('/', [
     'index'
 ])->name('index');
 
-Route::get('/', [
-    UserController::class,
-    'index'
-])->name('index');
+Route::prefix('writer')->middleware(['auth'])->group(function () {
 
-Route::get('/writer', function () {
-    return view('writer');
-})->middleware(['auth'])->name('dashboard');
+    Route::get('', [
+        UserController::class,
+        'write'
+    ])->name('write');
+
+    Route::post('/update', [
+        UserController::class,
+        'update'
+    ])->name('app2');
+});
+
+Route::post('user/update', [
+    UserController::class,
+    'update'
+])->name('app2');
+
+
+
+
+
 
 //Laravel8からルーティングの描き方が変わっている
 Route::get('/hello', [HelloController::class, 'hello']);

@@ -10,6 +10,8 @@ class novel extends Model
     use HasFactory;
 
     protected $fillable = [
+        'novel_id',
+        'novel_title',
         'information',
         'sentence'
     ];

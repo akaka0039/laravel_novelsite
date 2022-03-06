@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Uesr;
+use App\Models\User;
 use App\Models\novel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,13 +19,26 @@ class UserController extends Controller
      */
     public function index()
     {
-        $novels = DB::table('novels')->get();
+        $novels = DB::table('novels')
+            ->paginate(5);
+
 
         //dd($users);
 
         return view(
             'app2',
             compact('novels')
+        );
+    }
+
+    public function write()
+    {
+
+
+        //dd($users);
+
+        return view(
+            'writer',
         );
     }
 
@@ -53,10 +66,10 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Uesr  $uesr
+     * @param  \App\Models\Uesr  $User
      * @return \Illuminate\Http\Response
      */
-    public function show(Uesr $uesr)
+    public function show(User $User)
     {
         //
     }
@@ -64,10 +77,10 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Uesr  $uesr
+     * @param  \App\Models\Uesr  $User
      * @return \Illuminate\Http\Response
      */
-    public function edit(Uesr $uesr)
+    public function edit(User $User)
     {
         //
     }
@@ -76,21 +89,35 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Uesr  $uesr
+     * @param  \App\Models\Uesr  $User
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Uesr $uesr)
+    public function update(Request $request, User $User)
     {
-        //
+
+        $novel = Auth::id();
+        // var_dump($novel);
+        // dd($novel);
+
+        // Novel::create([
+        //     'novel_id' => $novel,
+        //     'novel_title' => $request->novel_title,
+        //     'information' => $request->information,
+        //     'sentence' => $request->sentence,
+        // ]);
+
+        $novels = DB::table('novels')->get();
+
+        return redirect()->route('index')->with(compact('novels'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Uesr  $uesr
+     * @param  \App\Models\Uesr  $User
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Uesr $uesr)
+    public function destroy(User $User)
     {
         //
     }

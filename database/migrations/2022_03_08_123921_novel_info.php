@@ -16,7 +16,7 @@ class NovelInfo extends Migration
         Schema::create('novel_infos', function (Blueprint $table) {
             $table->unsignedBigInteger('novel_id')
                 ->foreignId('novel_id')
-                // ->unsigned()
+                ->unsigned()
                 ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');

@@ -22,7 +22,7 @@ class UserController extends Controller
     public function index()
     {
 
-        $id = User::get(['id']);
+
 
         $novels = DB::table('novels')
             ->paginate(5);
@@ -34,7 +34,7 @@ class UserController extends Controller
 
         return view(
             'app2',
-            compact('id', 'novels')
+            compact('novels')
         );
     }
 
@@ -42,22 +42,30 @@ class UserController extends Controller
     {
 
         // ユーザが書いた小説を取得する
-        $novel_id = DB::table('novels')
-            ->where('id', Auth::id())
-            ->get();
-
-        // 重複したデータを削除する
-        $novels = $novel_id->unique('novel_id');
-
-        // ->groupBy('user_id')
-        // ->having('user_id', '=', Auth::id())
-        // ->get();
-
+        $novels = DB::table('novels')
+            ->where('user_id', Auth::id())
+            ->paginate(5);
 
 
         return view(
             'writer',
             compact('novels')
+        );
+    }
+
+    // 小説を読む
+    public function read($id)
+    {
+
+        $novels = DB::table('novels')
+            ->where('novel_id', $id)
+            ->get();
+        $novel_infos = DB::table('novel_infos')
+            ->where('novel_id', $id)
+            ->paginate(1);
+        return view(
+            'read',
+            compact('novels', 'novel_infos')
         );
     }
 
@@ -88,9 +96,26 @@ class UserController extends Controller
      * @param  \App\Models\Uesr  $User
      * @return \Illuminate\Http\Response
      */
-    public function show(User $User)
+    public function show($id)
     {
-        //
+
+
+        $novels = DB::table('novels')
+            ->where('novel_id', $id)
+            ->get();
+
+
+
+        $novel_infos = DB::table('novel_infos')
+            ->where('novel_id', $id)
+            ->get();
+
+
+
+        return view(
+            'show',
+            compact('novels', 'novel_infos')
+        );
     }
 
     /**
@@ -114,16 +139,16 @@ class UserController extends Controller
     public function update(Request $request, User $User)
     {
         // 新規投稿用
-        $id = Auth::id();
-        $novel_id = novel::max('novel_id') + 1;
+        $user_id = Auth::id();
+
 
         Novel::create([
-            'id' => $id,
-            'novel_id' => $novel_id,
+            'user_id' => $user_id,
             'novel_title' => $request->novel_title,
             'information' => $request->information,
         ]);
 
+        $novel_id = novel::max('novel_id');
         novel_info::create([
             'novel_id' => $novel_id,
             'sentence' => $request->sentence,

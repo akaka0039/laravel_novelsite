@@ -36,14 +36,25 @@ Route::get('/', [
 ])->name('index');
 
 // 小説の詳細
-Route::get('/show', [
+Route::get('/show/{id}', [
     UserController::class,
     'show'
 ])->name('show');
 
+// 小説を読む
+Route::get('/read/{id}', [
+    UserController::class,
+    'read'
+])->name('read');
+
 Route::prefix('writer')->middleware(['auth'])->group(function () {
 
     Route::get('', [
+        UserController::class,
+        'write'
+    ])->name('write');
+
+    Route::get('edit', [
         UserController::class,
         'write'
     ])->name('write');

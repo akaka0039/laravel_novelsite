@@ -1,13 +1,16 @@
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-blue-500" />
-            </a>
+            <div class="w-28">
+                <a href="/">
+                    <x-application-logo class="w-20 h-20 fill-current text-blue-500 border-2" />
+                </a>
+            </div>
         </x-slot>
 
         <!-- Session Status -->
-        <x-auth-session-status class="mb-4" :status="session('status')" />
+        <x-auth-session-status class="
+                        mb-4" :status="session('status')" />
 
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />

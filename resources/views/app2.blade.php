@@ -38,27 +38,38 @@
         @foreach ($novels as $novel)
             <section class="text-gray-600 body-font">
                 <div class="container px-5 py-24 mx-auto">
-                    <div class="flex flex-around -m-4">
-                        <div class="md:w-1/2 p-4 w-full">
 
-                            <div class="mt-4">
-                                <h1 class="text-gray-900 title-font text-lg font-medium">
-                                    小説名：{{ $novel->novel_title }}
-                                </h1>
-                                <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">
-                                    あらすじ紹介：{{ $novel->information }}
-                                </h3>
-                                {{-- <p class="mt-1">{{ $novel->sentence }}</p> --}}
+
+                    <a href="{{ route('show', ['id' => $novel->novel_id]) }}">
+
+                        <div class="flex flex-around -m-4">
+                            <div class="md:w-1/2 p-4 w-full">
+                                <div class="mt-4">
+                                    <h1 class="text-gray-900 title-font text-lg font-medium">
+                                        小説名：{{ $novel->novel_title }}
+                                    </h1>
+                                    <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">
+                                        あらすじ紹介：{{ $novel->information }}
+                                    </h3>
+                                    {{-- <p class="mt-1">{{ $novel->sentence }}</p> --}}
+                                </div>
+
                             </div>
-
                         </div>
-                    </div>
+                        {{-- <input type="hidden" name="novel_id" 　value="{{ $novel->novel_id }}"> --}}
+                    </a>
 
                 </div>
             </section>
         @endforeach
 
         {{ $novels->links() }}
+
+
+
+
+
+
 
         {{-- footer --}}
         <footer class="text-gray-600 body-font">

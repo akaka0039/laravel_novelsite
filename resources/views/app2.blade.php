@@ -32,7 +32,9 @@
         </header>
 
 
+
         {{-- body --}}
+
         @foreach ($novels as $novel)
             <section class="text-gray-600 body-font">
                 <div class="container px-5 py-24 mx-auto">
@@ -40,20 +42,22 @@
                         <div class="md:w-1/2 p-4 w-full">
 
                             <div class="mt-4">
-                                <h1 class="text-gray-500 text-xs tracking-widest title-font mb-1">
+                                <h1 class="text-gray-900 title-font text-lg font-medium">
                                     小説名：{{ $novel->novel_title }}
                                 </h1>
-                                <h3 class="text-gray-900 title-font text-lg font-medium">
-                                    The 400 Blows：{{ $novel->information }}
+                                <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">
+                                    あらすじ紹介：{{ $novel->information }}
                                 </h3>
-                                <p class="mt-1">{{ $novel->sentence }}</p>
+                                {{-- <p class="mt-1">{{ $novel->sentence }}</p> --}}
                             </div>
+
                         </div>
                     </div>
 
                 </div>
             </section>
         @endforeach
+
         {{ $novels->links() }}
 
         {{-- footer --}}

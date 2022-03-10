@@ -35,6 +35,12 @@ Route::get('/', [
     'index'
 ])->name('index');
 
+// 小説の詳細
+Route::get('/show', [
+    UserController::class,
+    'show'
+])->name('show');
+
 Route::prefix('writer')->middleware(['auth'])->group(function () {
 
     Route::get('', [

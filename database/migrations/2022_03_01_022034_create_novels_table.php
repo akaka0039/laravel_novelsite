@@ -14,12 +14,13 @@ class CreateNovelsTable extends Migration
     public function up()
     {
         Schema::create('novels', function (Blueprint $table) {
-            $table->id();
-            $table->integer('novel_id');
+            $table->unsignedBigInteger('id')
+                ->foreignId('id')
+                ->unsigned()
+                ->constrained();
+            $table->unsignedBigInteger('novel_id');
             $table->string('novel_title');
             $table->text('information');
-            $table->text('sentence');
-            $table->integer('type')->nullable();
             $table->timestamps();
         });
     }

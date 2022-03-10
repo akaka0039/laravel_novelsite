@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\novel;
+use App\Models\novel_info;
+use Illuminate\Foundation\Auth\User as AuthUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-
+use NovelInfo;
 
 class UserController extends Controller
 {
@@ -19,26 +21,43 @@ class UserController extends Controller
      */
     public function index()
     {
+
+        $id = User::get(['id']);
+
         $novels = DB::table('novels')
             ->paginate(5);
 
 
+
         //dd($users);
+
 
         return view(
             'app2',
-            compact('novels')
+            compact('id', 'novels')
         );
     }
 
-    public function write()
+    public function write(Request $request)
     {
 
+        // ユーザが書いた小説を取得する
+        $novel_id = DB::table('novels')
+            ->where('id', Auth::id())
+            ->get();
 
-        //dd($users);
+        // 重複したデータを削除する
+        $novels = $novel_id->unique('novel_id');
+
+        // ->groupBy('user_id')
+        // ->having('user_id', '=', Auth::id())
+        // ->get();
+
+
 
         return view(
             'writer',
+            compact('novels')
         );
     }
 
@@ -94,21 +113,26 @@ class UserController extends Controller
      */
     public function update(Request $request, User $User)
     {
+        // 新規投稿用
+        $id = Auth::id();
+        $novel_id = novel::max('novel_id') + 1;
 
-        $novel = Auth::id();
-        // var_dump($novel);
-        // dd($novel);
+        Novel::create([
+            'id' => $id,
+            'novel_id' => $novel_id,
+            'novel_title' => $request->novel_title,
+            'information' => $request->information,
+        ]);
 
-        // Novel::create([
-        //     'novel_id' => $novel,
-        //     'novel_title' => $request->novel_title,
-        //     'information' => $request->information,
-        //     'sentence' => $request->sentence,
-        // ]);
+        novel_info::create([
+            'novel_id' => $novel_id,
+            'sentence' => $request->sentence,
+            'page' => 1,
+        ]);
 
         $novels = DB::table('novels')->get();
 
-        return redirect()->route('index')->with(compact('novels'));
+        return redirect()->route('write')->with(compact('novels'));
     }
 
     /**

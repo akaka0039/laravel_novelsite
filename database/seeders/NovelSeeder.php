@@ -16,39 +16,21 @@ class NovelSeeder extends Seeder
     {
         DB::table('novels')->insert([
             [
-                'novel_ID' => 1,
-                'novel_title' => "シャーロック・ホームズの冒険",
-                'information' => "ここに説明文が入ります",
-                'sentence' => "ここに小説の本文が入ります",
-
-            ],
-            [
-                'novel_ID' => 2,
-                'novel_title' => "海の見える街",
-                'information' => "ここに説明文が入ります",
-                'sentence' => "ここに小説の本文が入ります",
-            ],
-            [
-                'novel_ID' => 2,
-                'novel_title' => "秘密",
-                'information' => "ここに説明文が入ります",
-                'sentence' => "ここに小説の本文が入ります",
-
-            ],
-            [
-                'novel_ID' => 1,
+                'id' => 1,
+                'novel_id' => 1,
                 'novel_title' => "ワンピース",
-                'information' => "ここに説明文が入ります",
-                'sentence' => "ここに小説の本文が入ります",
+                'information' => "一つなき秘宝を求める物語",
 
             ],
             [
-                'novel_ID' => 1,
-                'novel_title' => "自由",
+                'id' => 2,
+                'novel_id' => 1,
+                'novel_title' => "大きな栗の木下",
                 'information' => "ここに説明文が入ります",
-                'sentence' => "ここに小説の本文が入ります",
-                // 'type' => '',
+
             ],
+
+
         ]);
     }
 }

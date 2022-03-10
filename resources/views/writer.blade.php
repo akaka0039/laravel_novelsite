@@ -1,11 +1,37 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            小説投稿画面
+            投稿小説一覧
         </h2>
     </x-slot>
 
+    {{-- body --}}
 
+    @foreach ($novels as $novel)
+        <section class="text-gray-600 body-font">
+            <div class="container px-5 py-24 mx-auto">
+                <div class="flex flex-around -m-4">
+                    <div class="md:w-1/2 p-4 w-full">
+                        <div class="mt-4">
+                            <h1 class="text-gray-500 text-xs tracking-widest title-font mb-1">
+                                小説名：{{ $novel->novel_title }}
+                            </h1>
+                            <h3 class="text-gray-900 title-font text-lg font-medium">
+                                The 400 Blows：{{ $novel->information }}
+                            </h3>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    @endforeach
+
+
+    <h2 class="text-center font-semibold text-xl text-gray-800 leading-tight">
+        小説投稿画面＜新規＞
+    </h2>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">

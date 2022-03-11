@@ -29,14 +29,11 @@
                                 <h3 class="text-gray-900 title-font text-lg font-medium">
                                     The 400 Blows：{{ $novel->information }}
                                 </h3>
-                                <div class="item-center">
-                                    <button onclick="" type="submit"
-                                        class=" text-red-600 bg-green-800 border-0 py-2 px-5 focus:outline-none hover:bg-green-900 rounded">edit</button>
-                                </div>
                             </div>
                         </div>
                     </div>
                 </a>
+
             </div>
         </section>
     @endforeach

@@ -47,6 +47,8 @@ Route::get('/read/{id}', [
     'read'
 ])->name('read');
 
+
+
 Route::prefix('writer')->middleware(['auth'])->group(function () {
 
     Route::get('', [
@@ -54,15 +56,15 @@ Route::prefix('writer')->middleware(['auth'])->group(function () {
         'write'
     ])->name('write');
 
-    Route::get('edit', [
+    Route::get('edit/{id}', [
         UserController::class,
-        'write'
-    ])->name('write');
+        'edit'
+    ])->name('edit');
 
     Route::post('/update', [
         UserController::class,
-        'update'
-    ])->name('app2');
+        'editUpdate'
+    ])->name('writer/update');
 });
 
 Route::post('user/update', [

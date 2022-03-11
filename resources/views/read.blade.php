@@ -30,6 +30,7 @@
                 </button>
             </div>
         </header>
+
         @foreach ($novels as $novel)
             <section class="text-gray-600 body-font">
                 <div class="container px-5 py-12 mx-auto">
@@ -49,6 +50,7 @@
             </section>
         @endforeach
 
+
         @foreach ($novel_infos as $novel_info)
             <section class="text-gray-600 body-font">
                 <div class="container px-5 py-5 mx-auto">
@@ -67,5 +69,10 @@
 
         {{ $novel_infos->links() }}
 
+        <div class="item-right">
+            <button onclick="location.href='{{ route('edit', ['id' => $novel->novel_id]) }}'" type="submit"
+                class=" text-red-600 bg-green-800 border-0 py-2 px-5 focus:outline-none hover:bg-green-900 rounded">edit</button>
+        </div>
+        {{-- <input type="hidden" name="novel_id" 　value="{{ $novel->novel_id }}"> --}}
     </x-slot>
 </x-guest-layout>

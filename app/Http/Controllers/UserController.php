@@ -69,6 +69,29 @@ class UserController extends Controller
         );
     }
 
+    public function editUpdate(Request $request)
+    {
+
+
+        // 編集
+
+        novel::where('novel_id', $request->novel_id)
+            ->update([
+                'novel_title' => $request->novel_title,
+                'information' => $request->information,
+            ]);
+
+        novel_info::where('novel_id', $request->novel_id)
+            ->where('page', '=', $request->page)
+            ->update([
+                'sentence' => $request->sentence,
+            ]);
+
+        $novels = DB::table('novels')->get();
+
+        return redirect()->route('write')->with(compact('novels'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -99,18 +122,13 @@ class UserController extends Controller
     public function show($id)
     {
 
-
         $novels = DB::table('novels')
             ->where('novel_id', $id)
             ->get();
 
-
-
         $novel_infos = DB::table('novel_infos')
             ->where('novel_id', $id)
             ->get();
-
-
 
         return view(
             'show',
@@ -124,9 +142,20 @@ class UserController extends Controller
      * @param  \App\Models\Uesr  $User
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $User)
+    public function edit($id)
     {
-        //
+        $novels = DB::table('novels')
+            ->where('novel_id', $id)
+            ->get();
+
+        $novel_infos = DB::table('novel_infos')
+            ->where('novel_id', $id)
+            ->paginate(1);
+
+        return view(
+            'edit',
+            compact('novels', 'novel_infos')
+        );
     }
 
     /**

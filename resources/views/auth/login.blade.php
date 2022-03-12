@@ -6,6 +6,8 @@
                     <x-application-logo class="w-20 h-20 fill-current text-blue-500 border-2" />
                 </a>
             </div>
+            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>
+
         </x-slot>
 
         <!-- Session Status -->

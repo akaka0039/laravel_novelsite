@@ -29,6 +29,7 @@
                     </svg>
                 </button>
             </div>
+            <x-flash-message status="session('status')" />
         </header>
 
 

@@ -61,12 +61,38 @@ Route::prefix('writer')->middleware(['auth'])->group(function () {
         'edit'
     ])->name('edit');
 
-    Route::post('/update', [
+    // 追記投稿「ページ推移」
+    Route::get('add', [
+        UserController::class,
+        'add'
+    ])->name('writer.add');
+
+    // 追記投稿「ページ推移」
+    Route::post('create', [
+        UserController::class,
+        'create'
+    ])->name('writer.create');
+
+    //小説編集
+    Route::post('update', [
         UserController::class,
         'editUpdate'
     ])->name('writer/update');
+
+    // ページデリート
+    Route::post('delete/page', [
+        UserController::class,
+        'deletePage'
+    ])->name('writer/page/delete');
+
+    // ユーザデリート
+    Route::post('delete', [
+        UserController::class,
+        'deleteUser'
+    ])->name('writer/user/delete');
 });
 
+//新規投稿
 Route::post('user/update', [
     UserController::class,
     'update'

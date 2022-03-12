@@ -5,9 +5,10 @@
             <div class="text-center text-5xl font-extrabold leading-none tracking-tight">
                 <span class="bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-blue-500">
                     Hello world
+
                 </span>
             </div>
-
+            <x-flash-message status="session('status')" />
         </h2>
     </x-slot>
 
@@ -158,7 +159,6 @@
 
 
 
-
     <h2 class="text-center font-semibold text-xl text-gray-800 leading-tight">
         小説投稿画面＜新規＞
     </h2>
@@ -210,6 +210,18 @@
                                                 class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">投稿する</button>
                                         </div>
 
+                                    </form>
+
+
+                                    {{-- ユーザ削除機能 --}}
+                                    <form method="post" action="{{ route('writer/user/delete') }}">
+                                        @csrf
+                                        <div class="p-2 w-full flex justify-around mt-32">
+                                            <button type="submit"
+                                                class=" text-black bg-red-400 border-0 py-2 px-5 focus:outline-none hover:bg-red-600 rounded">ユーザを削除する</a>
+                                                <input type="hidden" name="user_id" value={{ $user_id }}>
+                                                <input type="hidden" name="novel_id" value={{ $user_id }}>
+                                        </div>
                                     </form>
 
                                     <div class="p-2 w-full pt-8 mt-8 border-t border-gray-200 text-center">

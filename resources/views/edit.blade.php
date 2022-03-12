@@ -11,10 +11,6 @@
         </h2>
     </x-slot>
 
-    {{-- body --}}
-
-
-
     <h2 class="text-center font-semibold text-xl text-gray-800 leading-tight">
         小説投稿画面＜編集＞
     </h2>
@@ -36,7 +32,6 @@
 
                                         @foreach ($novels as $novel)
                                             @csrf
-
                                             <input type="hidden" name="novel_id" value="{{ $novel->novel_id }}">
                                             <div class="p-2 w-1/2">
                                                 <div class="relative">
@@ -47,7 +42,6 @@
                                                         class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                                 </div>
                                             </div>
-
 
                                             <div class="p-2 w-full">
                                                 <div class="relative">
@@ -70,7 +64,9 @@
                                                 <input type="hidden" name="page" value="{{ $novel_info->page }}">
                                             @endforeach
                                             {{ $novel_infos->links() }}
-                                            <div class="p-2 w-full">
+                                            <div class="flex justify-center">
+                                                <a href="/writer" button
+                                                    class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">戻る</button></a>
                                                 <button
                                                     class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">投稿する</button>
                                             </div>

@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\HelloController;
+use App\Http\Controllers\UserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -15,12 +17,31 @@ use App\Http\Controllers\HelloController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//　ユーザ（ユーザ登録していない人も含む）ルーティング
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+// Route::get('/', function () {
+//     return view('dashboard');
+// })->middleware(['auth'])->name('dashboard');
+
+// Route::prefix('cart')->middleware(['auth:users'])->group(function ()
+
+// index
+Route::get('/', [
+    UserController::class,
+    'index'
+])->name('index');
+
+Route::get('/', [
+    UserController::class,
+    'index'
+])->name('index');
+
+Route::get('/writer', function () {
+    return view('writer');
 })->middleware(['auth'])->name('dashboard');
 
 //Laravel8からルーティングの描き方が変わっている

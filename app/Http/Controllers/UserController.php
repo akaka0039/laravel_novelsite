@@ -3,10 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Uesr;
+use App\Models\novel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
-class UesrController extends Controller
+
+class UserController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +19,14 @@ class UesrController extends Controller
      */
     public function index()
     {
-        //
+        $novels = DB::table('novels')->get();
+
+        //dd($users);
+
+        return view(
+            'app2',
+            compact('novels')
+        );
     }
 
     /**

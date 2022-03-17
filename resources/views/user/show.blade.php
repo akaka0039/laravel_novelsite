@@ -29,15 +29,8 @@
                     </svg>
                 </button>
             </div>
+            <x-flash-message status="session('status')" />
         </header>
-
-
-        {{-- @foreach ($novel_infos as $novel_info)
-            {{ $novel_info->page }}：
-            {{ $novel_info->sentence }}
-            <br>
-        @endforeach --}}
-
 
         <section class="text-gray-600 body-font">
             <div class="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
@@ -47,17 +40,26 @@
                         <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">
                             {{ $novel->novel_title }}
                         </h1>
-                        <p class="mb-8 leading-relaxed">{{ $novel->information }}</p>
+                        <p class="mb-8 leading-relaxed">{{ $novel->novel_information }}</p>
+
+                        @foreach ($novel_infos as $novel_info)
+                            <div class="flex justify-center">
+                                {{ $loop->iteration }}
+                                <a
+                                    href="{{ route('user.read', ['novel_id' => $novel->novel_id, 'page' => $loop->iteration]) }}"><button
+                                        class="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">{{ $novel_info->subtitle }}</button></a>
+                            </div>
+                        @endforeach
 
                         <div class="flex justify-center">
-                            <a href="/writer" button
+                            <a href="/" button
                                 class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">戻る</button></a>
-                            <a href="{{ route('read', ['id' => $novel->novel_id]) }}"><button
+                            <a
+                                href="{{ route('user.read', ['novel_id' => $novel->novel_id, 'page' => $loop->iteration]) }}"><button
                                     class="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">読む</button></a>
                         </div>
                     </div>
                 @endforeach
-
             </div>
         </section>
     </x-slot>

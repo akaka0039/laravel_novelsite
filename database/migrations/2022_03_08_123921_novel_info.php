@@ -20,9 +20,10 @@ class NovelInfo extends Migration
                 ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->text('sentence');
             $table->integer('page');
-            $table->integer('type')->nullable();
+            $table->string('subtitle');
+            $table->text('episode');
+            $table->integer('genre')->nullable();
             $table->timestamps();
         });
     }

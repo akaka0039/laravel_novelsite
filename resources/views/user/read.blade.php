@@ -32,8 +32,6 @@
             </div>
         </header>
 
-
-
         @foreach ($novels as $novel)
             <section class="text-gray-600 body-font">
                 <div class="container px-5 py-12 mx-auto">
@@ -44,7 +42,7 @@
                                     小説名：{{ $novel->novel_title }}
                                 </h1>
                                 <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">
-                                    あらすじ紹介：{{ $novel->information }}
+                                    あらすじ紹介：{{ $novel->novel_information }}
                                 </h3>
                             </div>
                         </div>
@@ -53,8 +51,6 @@
             </section>
         @endforeach
 
-
-
         @foreach ($novel_infos as $novel_info)
             <section class="text-gray-600 body-font">
                 <div class="container px-5 py-5 mx-auto">
@@ -62,7 +58,7 @@
                         <div class="md:w-1/2 p-4 w-full">
                             <div class="mt-4">
                                 <h2 class="text-gray-900 tracking-widest title-font mb-1">
-                                    {{ $novel_info->sentence }}
+                                    {{ $novel_info->episode }}
                                 </h2>
                             </div>
                         </div>
@@ -71,46 +67,17 @@
             </section>
         @endforeach
 
-        {{ $novel_infos->links() }}
-
         <div class="flex justify-center">
-            <a href="/writer" button
-                class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">戻る</button></a>
+            <a href="/" button
+                class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">Top画面へ</button></a>
+            <a href="{{ route('user.read', ['novel_id' => $novel->novel_id, 'page' => $page - 1]) }}"><button
+                    class="
+                ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">前へ</button></a>
 
-            {{-- 追加投稿 --}}
-            <button
-                class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 pd-rigt focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"
-                onclick="location.href='{{ route('writer.add', ['novel_id' => $novel->novel_id]) }}'">
-                追加投稿
-                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    class="w-4 h-4 ml-1" viewBox="0 0 24 24">
-                    <path d="M5 12h14M12 5l7 7-7 7"></path>
-                </svg>
-            </button>
 
-            {{-- 編集 --}}
-            <div class="item-right">
-                <button onclick="location.href='{{ route('edit', ['id' => $novel->novel_id]) }}'" type="submit"
-                    class=" text-blue-600 bg-gray-300 border-0 py-2 px-5 focus:outline-none hover:bg-green-900 rounded">edit</button>
-            </div>
-
-            {{-- 削除 --}}
-            <form method="post" action="{{ route('writer/page/delete') }}">
-                @csrf
-
-                @foreach ($novel_infos as $novel_info)
-                    <div class="p-2 w-full flex justify-around mt-32">
-                        <button type="submit"
-                            class=" text-black bg-red-400 border-0 py-2 px-5 focus:outline-none hover:bg-red-600 rounded">Delete</a>
-                            <input type="hidden" name="novel_id" value="{{ $novel_info->novel_id }}">
-
-                            <input type="hidden" name="page" value="{{ $novel_info->page }}">
-                    </div>
-                @endforeach
-            </form>
-
+            <a href="{{ route('user.read', ['novel_id' => $novel->novel_id, 'page' => $page + 1]) }}"><button
+                    class="
+                ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">次へ</button></a>
         </div>
-
-        {{-- <input type="hidden" name="novel_id" 　value="{{ $novel->novel_id }}"> --}}
     </x-slot>
 </x-guest-layout>

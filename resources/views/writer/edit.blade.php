@@ -28,7 +28,7 @@
 
                             <div class="lg:w-1/2 md:w-2/3 mx-auto">
                                 <div class="-m-2">
-                                    <form method="post" action="{{ route('writer/update') }}">
+                                    <form method="post" action="{{ route('writer.update') }}">
 
                                         @foreach ($novels as $novel)
                                             @csrf
@@ -47,8 +47,8 @@
                                                 <div class="relative">
                                                     <label for="message"
                                                         class="leading-7 text-sm text-gray-600">小説概要</label>
-                                                    <textarea id="message" name="information"
-                                                        class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out">{{ $novel->information }}</textarea>
+                                                    <textarea id="message" name="novel_information"
+                                                        class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out">{{ $novel->novel_information }}</textarea>
                                                 </div>
                                             </div>
 
@@ -57,18 +57,18 @@
                                                     <div class="relative">
                                                         <label for="message"
                                                             class="leading-7 text-sm text-gray-600">内容</label>
-                                                        <textarea id="message" name="sentence" value="sentence"
-                                                            class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out">{{ $novel_info->sentence }}</textarea>
+                                                        <textarea id="message" name="episode"
+                                                            class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out">{{ $novel_info->episode }}</textarea>
                                                     </div>
                                                 </div>
                                                 <input type="hidden" name="page" value="{{ $novel_info->page }}">
                                             @endforeach
-                                            {{ $novel_infos->links() }}
+
                                             <div class="flex justify-center">
                                                 <a href="/writer" button
                                                     class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">戻る</button></a>
                                                 <button
-                                                    class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">投稿する</button>
+                                                    class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">編集する</button>
                                             </div>
                                         @endforeach
                                     </form>

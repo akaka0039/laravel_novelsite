@@ -17,7 +17,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function create()
     {
-        return view('auth.login');
+        return view('writer.auth.login');
     }
 
     /**
@@ -43,7 +43,8 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request)
     {
-        Auth::guard('web')->logout();
+        // Auth::guard('web')->logout();
+        Auth::guard('writer')->logout();
 
         $request->session()->invalidate();
 

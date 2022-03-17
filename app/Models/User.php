@@ -50,6 +50,6 @@ class User extends Authenticatable
     public function novel()
     {
         //　複数持てる
-        return $this->hasMany(novel::class);
+        return $this->hasMany(novels::class);
     }
 }

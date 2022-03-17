@@ -11,8 +11,14 @@ class novel_info extends Model
 
     protected $fillable = [
         'novel_id',
-        'sentence',
-        'information',
+        'episode',
+        'subtitle',
         'page',
     ];
+
+    public function novels()
+    {
+        //　複数持てる
+        return $this->belongsTo(novels::class);
+    }
 }

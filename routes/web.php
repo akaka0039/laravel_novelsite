@@ -23,9 +23,9 @@ use App\Http\Controllers\UserController;
 //     return view('welcome');
 // });
 
-// Route::get('/', function () {
-//     return view('dashboard');
-// })->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
 // Route::prefix('cart')->middleware(['auth:users'])->group(function ()
 
@@ -35,14 +35,47 @@ Route::get('/', [
     'index'
 ])->name('index');
 
-Route::get('/', [
+// 小説の詳細
+Route::get('/show/{id}', [
     UserController::class,
-    'index'
-])->name('index');
+    'show'
+])->name('show');
 
-Route::get('/writer', function () {
-    return view('writer');
-})->middleware(['auth'])->name('dashboard');
+// 小説を読む
+Route::get('/read/{id}', [
+    UserController::class,
+    'read'
+])->name('read');
+
+
+
+Route::prefix('writer')->middleware(['auth'])->group(function () {
+
+    Route::get('', [
+        UserController::class,
+        'write'
+    ])->name('write');
+
+    Route::get('edit/{id}', [
+        UserController::class,
+        'edit'
+    ])->name('edit');
+
+    Route::post('/update', [
+        UserController::class,
+        'editUpdate'
+    ])->name('writer/update');
+});
+
+Route::post('user/update', [
+    UserController::class,
+    'update'
+])->name('app2');
+
+
+
+
+
 
 //Laravel8からルーティングの描き方が変わっている
 Route::get('/hello', [HelloController::class, 'hello']);

@@ -12,6 +12,9 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    // プライマリキーを変更のため
+    protected $primaryKey = 'user_id';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -41,6 +44,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
 
     public function novel()
     {

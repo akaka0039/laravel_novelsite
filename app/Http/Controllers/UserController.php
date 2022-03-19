@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Uesr;
+use App\Models\User;
 use App\Models\novel;
+use App\Models\novel_info;
+use Illuminate\Foundation\Auth\User as AuthUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-
+use NovelInfo;
 
 class UserController extends Controller
 {
@@ -19,14 +21,75 @@ class UserController extends Controller
      */
     public function index()
     {
-        $novels = DB::table('novels')->get();
+
+
+
+        $novels = DB::table('novels')
+            ->paginate(5);
+
+
 
         //dd($users);
+
 
         return view(
             'app2',
             compact('novels')
         );
+    }
+
+    public function write(Request $request)
+    {
+
+        // ユーザが書いた小説を取得する
+        $novels = DB::table('novels')
+            ->where('user_id', Auth::id())
+            ->paginate(5);
+
+
+        return view(
+            'writer',
+            compact('novels')
+        );
+    }
+
+    // 小説を読む
+    public function read($id)
+    {
+
+        $novels = DB::table('novels')
+            ->where('novel_id', $id)
+            ->get();
+        $novel_infos = DB::table('novel_infos')
+            ->where('novel_id', $id)
+            ->paginate(1);
+        return view(
+            'read',
+            compact('novels', 'novel_infos')
+        );
+    }
+
+    public function editUpdate(Request $request)
+    {
+
+
+        // 編集
+
+        novel::where('novel_id', $request->novel_id)
+            ->update([
+                'novel_title' => $request->novel_title,
+                'information' => $request->information,
+            ]);
+
+        novel_info::where('novel_id', $request->novel_id)
+            ->where('page', '=', $request->page)
+            ->update([
+                'sentence' => $request->sentence,
+            ]);
+
+        $novels = DB::table('novels')->get();
+
+        return redirect()->route('write')->with(compact('novels'));
     }
 
     /**
@@ -53,44 +116,86 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Uesr  $uesr
+     * @param  \App\Models\Uesr  $User
      * @return \Illuminate\Http\Response
      */
-    public function show(Uesr $uesr)
+    public function show($id)
     {
-        //
+
+        $novels = DB::table('novels')
+            ->where('novel_id', $id)
+            ->get();
+
+        $novel_infos = DB::table('novel_infos')
+            ->where('novel_id', $id)
+            ->get();
+
+        return view(
+            'show',
+            compact('novels', 'novel_infos')
+        );
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Uesr  $uesr
+     * @param  \App\Models\Uesr  $User
      * @return \Illuminate\Http\Response
      */
-    public function edit(Uesr $uesr)
+    public function edit($id)
     {
-        //
+        $novels = DB::table('novels')
+            ->where('novel_id', $id)
+            ->get();
+
+        $novel_infos = DB::table('novel_infos')
+            ->where('novel_id', $id)
+            ->paginate(1);
+
+        return view(
+            'edit',
+            compact('novels', 'novel_infos')
+        );
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Uesr  $uesr
+     * @param  \App\Models\Uesr  $User
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Uesr $uesr)
+    public function update(Request $request, User $User)
     {
-        //
+        // 新規投稿用
+        $user_id = Auth::id();
+
+
+        Novel::create([
+            'user_id' => $user_id,
+            'novel_title' => $request->novel_title,
+            'information' => $request->information,
+        ]);
+
+        $novel_id = novel::max('novel_id');
+        novel_info::create([
+            'novel_id' => $novel_id,
+            'sentence' => $request->sentence,
+            'page' => 1,
+        ]);
+
+        $novels = DB::table('novels')->get();
+
+        return redirect()->route('write')->with(compact('novels'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Uesr  $uesr
+     * @param  \App\Models\Uesr  $User
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Uesr $uesr)
+    public function destroy(User $User)
     {
         //
     }

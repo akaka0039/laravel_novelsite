@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateNovelsTable extends Migration
+class NovelInfo extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,16 @@ class CreateNovelsTable extends Migration
      */
     public function up()
     {
-        Schema::create('novels', function (Blueprint $table) {
-            $table->id('novel_id');
-            $table->unsignedBigInteger('user_id')
-                ->foreignId('user_id')
+        Schema::create('novel_infos', function (Blueprint $table) {
+            $table->unsignedBigInteger('novel_id')
+                ->foreignId('novel_id')
+                ->unsigned()
                 ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->string('novel_title');
-            $table->text('information');
+            $table->text('sentence');
+            $table->integer('page');
+            $table->integer('type')->nullable();
             $table->timestamps();
         });
     }
@@ -33,6 +34,5 @@ class CreateNovelsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('novels');
     }
 }

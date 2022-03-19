@@ -22,6 +22,9 @@ class UserController extends Controller
     // 小説一覧を表示する
     public function index()
     {
+        // $users = DB::table('user')
+        //     ->paginate(5);
+
         $novels = DB::table('novels')
             ->paginate(5);
 
@@ -37,6 +40,13 @@ class UserController extends Controller
         $novels = DB::table('novels')
             ->where('novel_id', $id)
             ->get();
+
+        if ($novels->isEmpty()) {
+            return redirect()->route('user.index')->with([
+                'message' => '小説がありませんでした',
+                'status' => 'alert',
+            ]);
+        }
 
         $novel_infos = DB::table('novel_infos')
             ->where('novel_id', $id)
@@ -54,10 +64,7 @@ class UserController extends Controller
     {
         // ページ数がゼロの場合に「前に」押下時は、showに飛ばす
         if (empty($page)) {
-            return redirect()->route('user.show', ['id' => $novel_id])->with([
-                'message' => '先のエピソードがありませんでした',
-                'status' => 'alert',
-            ]);;
+            return redirect()->route('user.show', ['id' => $novel_id]);
         }
 
         $novels = DB::table('novels')
@@ -112,7 +119,6 @@ class UserController extends Controller
     // 追加投稿
     public function create(Request $request)
     {
-
 
         //最大ページ数を取得
         $page = DB::table('novel_infos')

@@ -11,6 +11,8 @@ class novels extends Model
 
     protected $primaryKey = 'novel_id';
 
+    protected $dates = ['display_date'];
+
     protected $fillable = [
         'user_id',
         'novel_title',

@@ -13,55 +13,50 @@
                     <span class="ml-3 text-4xl">小説投稿サイト</span>
                 </a>
 
-                <button onclick="location.href='/login'"
-                    class="inline-flex items-end bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">ログイン
-                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                        stroke-width="2" class="top-3 w-4 h-4 ml-1" viewBox="0 0 24 24">
-                        <path d="M5 12h14M12 5l7 7-7 7"></path>
-                    </svg>
-                </button>
+                <x-flash-message status="session('status')" />
+
             </div>
+            <button onclick="location.href='/login'"
+                class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-300 rounded text-base md:mt-0">Button
+                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+                    <path d="M5 12h14M12 5l7 7-7 7"></path>
+                </svg>
+            </button>
         </header>
 
-
-
         {{-- body --}}
-
-
         @foreach ($novels as $novel)
-            <section class="text-gray-600 body-font">
-                <div class="container px-2 py-8 mx-auto items-center">
-
-                    <a href="{{ route('user.show', ['id' => $novel->novel_id]) }}">
-
-                        <div class="flex flex-around -m-2 bg-yellow-100 border-gray-500 rounded-lg">
-                            <div class=" p-4 w-full">
-                                <div class="mt-4 truncate">
-                                    <h1 class="text-gray-900 title-font text-lg font-top">
-                                        小説名：{{ $novel->novel_title }}
-                                    </h1>
-                                    <div class="md:w-1/2">
-                                        <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">
-                                            あらすじ紹介：{{ $novel->novel_information }}
-                                        </h3>
-                                    </div>
-
-                                </div>
-
+            <div class="container px-2 py-1 mx-auto items-center">
+                <a href="{{ route('user.show', ['id' => $novel->novel_id]) }}">
+                    <div class="max-w-4xl px-10 my-4 py-6 bg-gray-100 rounded-lg shadow-md">
+                        <div class="flex justify-between items-center">
+                            {{-- <span
+                                class="font-light text-gray-600">日付</span> --}}
+                            {{-- <div class="px-2 py-1 bg-gray-600 text-gray-100 font-bold rounded hover:bg-gray-500"
+                            href="#">Design</a> --}}
+                        </div>
+                        <div class="mt-2">
+                            <div class="text-2xl text-gray-700 font-bold hover:text-gray-600">
+                                {{ $novel->novel_title }}
                             </div>
-                            <div class="flex bg-gray-400 px-5">
-                                <div class="bottom-0 right-0 h-4 w-4 bg-gray-700">
-                                    <p>作成日</p>
-                                </div>
+                            <p class="mt-2 text-gray-600 truncate">{{ $novel->novel_information }}</p>
+                        </div>
+                        <div class="flex justify-between items-center mt-4">
+                            <div class="text-blue-600 hover:underline">Read more</div>
+                            <div>
+                                {{-- <a class="flex items-center" href="#">
+                                <img class="mx-4 w-10 h-10 object-cover rounded-full hidden sm:block"
+                                    src="https://images.unsplash.com/photo-1502980426475-b83966705988?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=373&q=80"
+                                    alt="avatar">
+                                <h1 class="text-gray-700 font-bold">Khatab wedaa</h1>
+                            </a> --}}
                             </div>
                         </div>
-
-                    </a>
-
-                </div>
-            </section>
+                    </div>
+                </a>
+            </div>
         @endforeach
-
 
         {{ $novels->links() }}
 

@@ -44,7 +44,7 @@
                                     {{ $loop->iteration }}話
                                 </div>
                                 <a
-                                    href="{{ route('user.read', ['novel_id' => $novel->novel_id, 'page' => $loop->iteration]) }}"><button
+                                    href="{{ route('user.read', ['novel_id' => $novel->novel_id, 'page' => $novel_info->page]) }}"><button
                                         class="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">{{ $novel_info->subtitle }}</button></a>
                             </div>
                         @endforeach
@@ -52,7 +52,7 @@
                             <a href="/" button
                                 class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">戻る</button></a>
                             <a
-                                href="{{ route('user.read', ['novel_id' => $novel->novel_id, 'page' => $loop->iteration]) }}"><button
+                                href="{{ route('user.read', ['novel_id' => $novel->novel_id, 'page' => $novel_info->page]) }}"><button
                                     class="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">読む</button></a>
                         </div>
                     </div>

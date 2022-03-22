@@ -6,7 +6,7 @@
                     <x-application-logo class="w-20 h-20 fill-current text-blue-500 border-2" />
                 </a>
             </div>
-            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>
+
 
         </x-slot>
 
@@ -46,7 +46,11 @@
                 </label>
             </div>
 
+            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>
+
             <div class="flex items-center justify-end mt-4">
+
+
                 @if (Route::has('password.request'))
                     <a class="underline text-sm text-gray-600 hover:text-gray-900"
                         href="{{ route('password.request') }}">

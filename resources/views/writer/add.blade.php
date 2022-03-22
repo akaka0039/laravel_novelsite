@@ -7,17 +7,11 @@
                     Hello world
                 </span>
             </div>
-
+            <x-flash-message status="session('status')" />
         </h2>
     </x-slot>
 
     {{-- body --}}
-
-
-
-    <h2 class="text-center font-semibold text-xl text-gray-800 leading-tight">
-        小説投稿画面＜追加投稿＞
-    </h2>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -25,9 +19,10 @@
                     <section class="text-gray-600 body-font relative">
                         <div class="container px-5 py-24 mx-auto">
                             <div class="flex flex-col text-center w-full mb-12">
-                                <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">投稿画面
+
+                                <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">追加投稿画面
                                 </h1>
-                                <p class="lg:w-2/3 mx-auto leading-relaxed text-base">小説を追加投稿</p>
+                                <p class="lg:w-2/3 mx-auto leading-relaxed text-base">小説を追加投稿する</p>
                             </div>
 
                             <div class="lg:w-1/2 md:w-2/3 mx-auto">
@@ -36,8 +31,12 @@
                                         <form method="post" action="{{ route('writer.create') }}">
                                             @csrf
 
-                                            <input type="hidden" name="novel_id" value="{{ $novel->novel_id }}">
+                                            <h1
+                                                class="sm:text-xl text-2xl font-medium title-font mb-4 text-gray-900 text-center">
+                                                {{ $novel->novel_title }}</h1>
 
+
+                                            <input type="hidden" name="novel_id" value="{{ $novel->novel_id }}">
 
                                             <div class="p-2 w-1/2">
                                                 <div class="relative">
@@ -53,7 +52,8 @@
                                                     <label for="message"
                                                         class="leading-7 text-sm text-gray-600">文章</label>
                                                     <textarea id="message" name="episode" value="episode"
-                                                        class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out">ここに記述</textarea>
+                                                        class="w-full h-64 bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none focus:border-indigo-500 transition duration-100 px-3 py-2 focus:ring-indigo-200">
+                                                    </textarea>
                                                 </div>
                                             </div>
 

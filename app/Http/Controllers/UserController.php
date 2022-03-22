@@ -71,6 +71,7 @@ class UserController extends Controller
             ->where('novel_id', $novel_id)
             ->get();
 
+        // 問題！！！！
         $novel_infos = DB::table('novel_infos')
             ->where('novel_id', $novel_id)
             ->where('page', $page)

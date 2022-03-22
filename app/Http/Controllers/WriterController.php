@@ -129,8 +129,8 @@ class WriterController extends Controller
 
 
         return redirect()->route('writer.show', ['id' => $request->novel_id])->with([
-            'message' => $request->page . 'ページを編集しました。',
-            'status' => 'alert',
+            'message' => $request->page . 'ページ目を編集しました。',
+            'status' => 'info',
         ]);
     }
 
@@ -142,6 +142,12 @@ class WriterController extends Controller
     // 追加投稿
     public function create(Request $request)
     {
+
+        $request->validate([
+            'subtitle' => ['required', 'string', 'max:100'],
+            'episode' => ['required', 'string', 'max:15000'],
+        ]);
+
         //最大ページ数を取得
         $page = DB::table('novel_infos')
             ->where('novel_id', $request->novel_id)
@@ -157,7 +163,7 @@ class WriterController extends Controller
 
         return redirect()->route('writer.show', ['id' => $request->novel_id])->with([
             'message' => $page + 1 . 'ページを追加投稿しました。',
-            'status' => 'alert',
+            'status' => 'info',
         ]);
     }
 
@@ -293,7 +299,7 @@ class WriterController extends Controller
 
 
         return redirect()
-            ->route('writer.show')
+            ->route('writer.show', ['id' => $request->novel_id])
             ->with([
                 'message' => $page . 'ページを削除しました。',
                 'status' => 'alert'

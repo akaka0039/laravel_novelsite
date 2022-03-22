@@ -29,7 +29,7 @@
 
         @foreach ($novels as $novel)
             <div class="text-center">
-                <div class="bg-white sm:py-24 lg:py-12 py-24 ">
+                <div class="bg-white sm:py-12 lg:py-12 py-24 ">
                     <div class="max-w-screen-md px-10 md:px-8 mx-auto">
                         <h1 class="text-gray-800 text-2xl sm:text-3xl font-bold text-center mb-4 md:mb-6">
                             {{ $novel->novel_title }}</h1>
@@ -42,8 +42,9 @@
             <div class="flex justify-center">
                 <div class="container px-1 py-1 mx-auto ">
                     <div class="flex flex-around">
-                        <p class="text-gray-900 text-lg mb-6 md:mb-8 py-5 px-14 text-center">
-                            {{ $novel_info->episode }} <a href="#"
+                        <p class="text-gray-900 text-lg mb-6 md:mb-8 py-5 px-14 text-left">
+
+                            {!! nl2br(htmlspecialchars($novel_info->episode)) !!} <a href="#"
                                 class="text-indigo-500 hover:text-indigo-600 active:text-indigo-700 underline transition duration-100">random</a>
                             or otherwise generated. It may be used to display a sample of fonts or generate text for
                             testing.

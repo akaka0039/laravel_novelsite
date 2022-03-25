@@ -38,7 +38,7 @@
                     <div class="md:w-1/2 p-4 w-full">
                         <div class="mt-4">
                             <h2 class="text-gray-900 tracking-widest title-font mb-1">
-                                {{ $novel_info->episode }}
+                                {!! nl2br(htmlspecialchars($novel_info->episode)) !!}
                             </h2>
                         </div>
                     </div>

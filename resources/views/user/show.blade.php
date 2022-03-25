@@ -38,23 +38,35 @@
                             {{ $novel->novel_title }}
                         </h1>
                         <p class="mb-8 leading-relaxed text-left ">{{ $novel->novel_information }}</p>
+
                         @foreach ($novel_infos as $novel_info)
-                            <div class="flex justify-center py-2">
-                                <div class="py-2">
-                                    {{ $loop->iteration }}話
-                                </div>
-                                <a
-                                    href="{{ route('user.read', ['novel_id' => $novel->novel_id, 'page' => $novel_info->page]) }}"><button
+                            <form method="get"
+                                action="{{ route('user.read', ['novel_id' => $novel->novel_id, 'page' => $novel_info->page]) }}">
+                                <div class="flex justify-center py-2">
+                                    <div class="py-2">
+                                        {{ $loop->iteration }}話
+                                    </div>
+                                    <button type="submit"
                                         class="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">{{ $novel_info->subtitle }}</button></a>
-                            </div>
+                                </div>
+                                <input type="hidden" name="page_read" value=2>
+                            </form>
                         @endforeach
+
                         <div class="flex justify-center py-5">
                             <a href="/" button
                                 class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">戻る</button></a>
-                            <a
-                                href="{{ route('user.read', ['novel_id' => $novel->novel_id, 'page' => $novel_info->page]) }}"><button
+
+
+
+                            <form method="get"
+                                action="{{ route('user.read', ['novel_id' => $novel->novel_id, 'page' => 1]) }}">
+                                <button type="submit"
                                     class="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">読む</button></a>
+                                <input type="hidden" name="page_read" value=2>
+                            </form>
                         </div>
+
                     </div>
                 @endforeach
             </div>

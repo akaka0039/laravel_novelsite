@@ -36,37 +36,34 @@
                     </div>
                 </div>
             </div>
-        @endforeach
-
-        @foreach ($novel_infos as $novel_info)
+            {{-- エピソード --}}
             <div class="flex justify-center">
                 <div class="container px-1 py-1 mx-auto ">
                     <div class="flex flex-around">
                         <p class="text-gray-900 text-lg mb-6 md:mb-8 py-5 px-14 text-left">
-
-                            {!! nl2br(htmlspecialchars($novel_info->episode)) !!} <a href="#"
-                                class="text-indigo-500 hover:text-indigo-600 active:text-indigo-700 underline transition duration-100">random</a>
-                            or otherwise generated. It may be used to display a sample of fonts or generate text for
-                            testing.
-                            Filler text is dummy text which has no meaning however looks very similar to real text.
+                            {!! nl2br(htmlspecialchars($novel_infos->episode)) !!}
                         </p>
                     </div>
                 </div>
             </div>
+
+            <div class="flex justify-center">
+                {{-- ホーム画面へ --}}
+                <a href="/" button
+                    class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">Top画面へ</button></a>
+
+                {{-- 読書ページへ --}}
+                <form method="get"
+                    action="{{ route('user.read', ['novel_id' => $novel->novel_id, 'page' => $novel_infos->page]) }}">
+                    <button type="submit" name="page_read" value="0"
+                        class="
+                ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">前へ</button>
+                    <button type="submit" name="page_read" value="1"
+                        class="
+                ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">次へ</button>
+                </form>
+            </div>
         @endforeach
 
-
-        <div class="flex justify-center">
-            <a href="/" button
-                class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">Top画面へ</button></a>
-            <a href="{{ route('user.read', ['novel_id' => $novel->novel_id, 'page' => $page - 1]) }}"><button
-                    class="
-                ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">前へ</button></a>
-
-
-            <a href="{{ route('user.read', ['novel_id' => $novel->novel_id, 'page' => $page + 1]) }}"><button
-                    class="
-                ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">次へ</button></a>
-        </div>
     </x-slot>
 </x-guest-layout>

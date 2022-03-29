@@ -65,13 +65,14 @@
                                         @foreach ($novels as $novel)
                                             @foreach ($novel_infos as $novel_info)
                                                 <tr>
-                                                    <td class="md:px-4 py-3 truncate"><a
+                                                    <td class="md:px-4 py-3 truncate hover:text-blue-500"><a
                                                             href="{{ route('writer.read', ['novel_id' => $novel->novel_id, 'page' => $novel_info->page]) }}">
-                                                            {{ $loop->iteration }} :
+                                                            {{ $novel_infos->firstItem() + $loop->iteration - 1 }} :
                                                             {{ $novel_info->subtitle }}</a></td>
                                                     <td class="md:px-4 py-3 truncate"> <a
                                                             href="{{ route('writer.read', ['novel_id' => $novel->novel_id, 'page' => $novel_info->page]) }}">{{ $novel_info->episode }}</a>
                                                     </td>
+
                                                     <td class="md:px-4 py-3">
                                                     </td>
 
@@ -108,8 +109,12 @@
 
 
                             </div>
+                            {{ $novel_infos->links() }}
                         </div>
+
                     </section>
+
+
                 </div>
                 <div class="flex justify-center py-5">
                     <a href="/writer/index" button

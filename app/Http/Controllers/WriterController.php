@@ -63,41 +63,60 @@ class WriterController extends Controller
     }
 
     // 小説を読む
-    public function read($novel_id, $page)
+    public function read(Request $request, $novel_id, $page)
     {
 
         $user_id = Auth::id();
 
         // ページ数がゼロの場合に「前に」押下時は、showに飛ばす
-        if (empty($page)) {
-            return redirect()->route('writer.show', ['id' => $novel_id]);
-        }
+        // バリエーション必要
+
+
 
         $novels = DB::table('novels')
-            ->where('user_id', $user_id)
             ->where('novel_id', $novel_id)
             ->get();
 
-        //小説情報が存在しなかった場合
-        if ($novels->isEmpty()) {
-            return redirect()->route('writer.index')->with([
-                'message' => '小説の情報がありませんでした',
-                'status' => 'alert',
-            ]);
+        // 0・・・前のページ
+        // 1・・・次のページ
+        // 2・・・現状維持
+
+        if ($request->page_read === "0") {
+            // 前のページ
+            $novel_infos = DB::table('novel_infos')
+                ->where('novel_id', $novel_id)
+                ->where('page', '<', $page)
+                ->orderBy('page', 'desc')
+                ->first();
+
+            // データが取得できなかった＝一個前が0ページだった場合
+            if (is_null($novel_infos)) {
+                return redirect()->route('writer.show', [$novel_id]);
+            }
+        } else if ($request->page_read === "1") {
+            // 次のページ
+            $novel_infos = DB::table('novel_infos')
+                ->where('novel_id', $novel_id)
+                ->where('page', '>', $page)
+                ->orderBy('page', 'asc')
+                ->first();
+        } else {
+            // 現状維持
+            $novel_infos = DB::table('novel_infos')
+                ->where('novel_id', $novel_id)
+                ->where('page', $page)
+                ->first();
         }
 
-        $novel_infos = DB::table('novel_infos')
-            ->where('novel_id', $novel_id)
-            ->where('page', $page)
-            ->get();
 
         //episodeが存在しなかった場合
-        if ($novel_infos->isEmpty()) {
+        if (is_null($novel_infos)) {
             return redirect()->route('writer.index')->with([
                 'message' => '先のエピソードがありませんでした',
                 'status' => 'alert',
             ]);
         }
+
 
         return view(
             'writer.read',
@@ -162,7 +181,7 @@ class WriterController extends Controller
         ]);
 
         return redirect()->route('writer.show', ['id' => $request->novel_id])->with([
-            'message' => $page + 1 . 'ページを追加投稿しました。',
+            'message' => '新規ページを追加投稿しました。',
             'status' => 'info',
         ]);
     }
@@ -193,7 +212,7 @@ class WriterController extends Controller
         $novel_infos = DB::table('novel_infos')
             ->where('novel_id', $id)
             ->orderBy('page', 'asc')
-            ->get();
+            ->paginate(10);
 
         return view(
             'writer.show',
@@ -280,7 +299,7 @@ class WriterController extends Controller
 
         return redirect()->route('writer.index')->with([
             'message' => '小説を新規投稿しました',
-            'status' => 'alert',
+            'status' => 'info',
         ]);
     }
 

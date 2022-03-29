@@ -90,6 +90,11 @@ class UserController extends Controller
                 ->where('page', '<', $page)
                 ->orderBy('page', 'desc')
                 ->first();
+
+            // データが取得できなかった＝一個前が0ページだった場合
+            if (is_null($novel_infos)) {
+                return redirect()->route('user.show', [$novel_id]);
+            }
         } else if ($request->page_read === "1") {
             // 次のページ
             $novel_infos = DB::table('novel_infos')

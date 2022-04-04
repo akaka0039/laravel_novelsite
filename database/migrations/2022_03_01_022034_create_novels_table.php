@@ -21,7 +21,7 @@ class CreateNovelsTable extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->string('novel_title');
-            $table->text('information');
+            $table->text('novel_information')->nullable();
             $table->timestamps();
         });
     }

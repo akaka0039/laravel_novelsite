@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TestController;
-use App\Http\Controllers\HelloController;
+
+
 use App\Http\Controllers\UserController;
 
 
@@ -17,71 +17,22 @@ use App\Http\Controllers\UserController;
 |
 */
 
-//　ユーザ（ユーザ登録していない人も含む）ルーティング
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-
-// Route::prefix('cart')->middleware(['auth:users'])->group(function ()
-
 // index
 Route::get('/', [
     UserController::class,
     'index'
-])->name('index');
+])->name('user.index');
 
 // 小説の詳細
 Route::get('/show/{id}', [
     UserController::class,
     'show'
-])->name('show');
+])->name('user.show');
 
 // 小説を読む
-Route::get('/read/{id}', [
+Route::get('/read/{novel_id}/{page}', [
     UserController::class,
     'read'
-])->name('read');
-
-
-
-Route::prefix('writer')->middleware(['auth'])->group(function () {
-
-    Route::get('', [
-        UserController::class,
-        'write'
-    ])->name('write');
-
-    Route::get('edit/{id}', [
-        UserController::class,
-        'edit'
-    ])->name('edit');
-
-    Route::post('/update', [
-        UserController::class,
-        'editUpdate'
-    ])->name('writer/update');
-});
-
-Route::post('user/update', [
-    UserController::class,
-    'update'
-])->name('app2');
-
-
-
-
-
-
-//Laravel8からルーティングの描き方が変わっている
-Route::get('/hello', [HelloController::class, 'hello']);
-
-Route::get('/hello2', [HelloController::class, 'hello2']);
-
-Route::get('index', [TestController::class, 'index']);
+])->name('user.read');
 
 require __DIR__ . '/auth.php';

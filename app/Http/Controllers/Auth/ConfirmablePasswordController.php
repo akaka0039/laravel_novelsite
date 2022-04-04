@@ -17,7 +17,7 @@ class ConfirmablePasswordController extends Controller
      */
     public function show()
     {
-        return view('auth.confirm-password');
+        return view('writer.auth.confirm-password');
     }
 
     /**
@@ -28,7 +28,7 @@ class ConfirmablePasswordController extends Controller
      */
     public function store(Request $request)
     {
-        if (! Auth::guard('web')->validate([
+        if (!Auth::guard('writer')->validate([
             'email' => $request->user()->email,
             'password' => $request->password,
         ])) {

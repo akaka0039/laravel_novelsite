@@ -29,50 +29,38 @@
                     </svg>
                 </button>
             </div>
+            <x-flash-message status="session('status')" />
         </header>
 
-        @foreach ($novels as $novel)
-            <section class="text-gray-600 body-font">
-                <div class="container px-5 py-12 mx-auto">
-                    <div class="flex flex-around -m-4">
-                        <div class="md:w-1/2 p-2 w-full">
-                            <div class="mt-4">
-                                <h1 class="text-gray-900 title-font text-lg font-medium">
-                                    小説名：{{ $novel->novel_title }}
-                                </h1>
-                                <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">
-                                    あらすじ紹介：{{ $novel->information }}
-                                </h3>
+        <section class="text-gray-600 body-font">
+            <div class="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
+                @foreach ($novels as $novel)
+                    <div
+                        class="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
+                        <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">
+                            {{ $novel->novel_title }}
+                        </h1>
+                        <p class="mb-8 leading-relaxed">{{ $novel->novel_information }}</p>
+
+                        @foreach ($novel_infos as $novel_info)
+                            <div class="flex justify-center">
+                                {{ $loop->iteration }}
+                                <a
+                                    href="{{ route('user.read', ['novel_id' => $novel->novel_id, 'page' => $loop->iteration]) }}"><button
+                                        class="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">{{ $novel_info->subtitle }}</button></a>
                             </div>
+                        @endforeach
+
+                        <div class="flex justify-center">
+                            <a href="/" button
+                                class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">戻る</button></a>
+                            <a
+                                href="{{ route('user.read', ['novel_id' => $novel->novel_id, 'page' => $loop->iteration]) }}"><button
+                                    class="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">読む</button></a>
                         </div>
                     </div>
-                </div>
-            </section>
-        @endforeach
-
-
-        @foreach ($novel_infos as $novel_info)
-            <section class="text-gray-600 body-font">
-                <div class="container px-5 py-5 mx-auto">
-                    <div class="flex flex-around -m-4">
-                        <div class="md:w-1/2 p-4 w-full">
-                            <div class="mt-4">
-                                <h2 class="text-gray-900 tracking-widest title-font mb-1">
-                                    {{ $novel_info->sentence }}
-                                </h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        @endforeach
-
-        {{ $novel_infos->links() }}
-
-        <div class="item-right">
-            <button onclick="location.href='{{ route('edit', ['id' => $novel->novel_id]) }}'" type="submit"
-                class=" text-red-600 bg-green-800 border-0 py-2 px-5 focus:outline-none hover:bg-green-900 rounded">edit</button>
-        </div>
-        {{-- <input type="hidden" name="novel_id" 　value="{{ $novel->novel_id }}"> --}}
+                @endforeach
+            </div>
+        </section>
     </x-slot>
 </x-guest-layout>

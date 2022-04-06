@@ -22,7 +22,7 @@
                     <div
                         class="flex flex-around -m-4 h-full border-2 border-blue-700 border-opacity-60 rounded-lg overflow-hidden">
                         <div class="md:w-1/2 p-4 w-full ">
-                            <div class="mt-4">
+                            <div class="mt-4 truncate">
                                 <h1 class="text-gray-500 text-font tracking-widest title-font mb-1">
                                     小説名：{{ $novel->novel_title }}
                                 </h1>

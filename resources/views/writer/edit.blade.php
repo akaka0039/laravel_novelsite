@@ -11,9 +11,6 @@
         </h2>
     </x-slot>
 
-    <h2 class="text-center font-semibold text-xl text-gray-800 leading-tight">
-        小説投稿画面＜編集＞
-    </h2>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -48,7 +45,7 @@
                                                     <label for="message"
                                                         class="leading-7 text-sm text-gray-600">小説概要</label>
                                                     <textarea id="message" name="novel_information"
-                                                        class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out">{{ $novel->novel_information }}</textarea>
+                                                        class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-y leading-6 transition-colors duration-200 ease-in-out">{{ $novel->novel_information }}</textarea>
                                                 </div>
                                             </div>
 
@@ -58,17 +55,17 @@
                                                         <label for="message"
                                                             class="leading-7 text-sm text-gray-600">内容</label>
                                                         <textarea id="message" name="episode"
-                                                            class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out">{{ $novel_info->episode }}</textarea>
+                                                            class="w-full h-64 transition duration-100 bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3  leading-6 resize-y ease-in-out">{{ $novel_info->episode }}</textarea>
                                                     </div>
                                                 </div>
                                                 <input type="hidden" name="page" value="{{ $novel_info->page }}">
                                             @endforeach
 
-                                            <div class="flex justify-center">
-                                                <a href="/writer" button
+                                            <div class="flex justify-center px-5">
+                                                <a href="/writer/show/{{ $novel->novel_id }}" button
                                                     class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">戻る</button></a>
                                                 <button
-                                                    class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">編集する</button>
+                                                    class="ml-8 inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">編集する</button>
                                             </div>
                                         @endforeach
                                     </form>

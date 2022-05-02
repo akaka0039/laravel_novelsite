@@ -81,7 +81,7 @@ class UserController extends Controller
 
         // 0・・・前のページ
         // 1・・・次のページ
-        // 2・・・現状維持
+        // それ以外・・・現状維持
 
         if ($request->page_read === "0") {
             // 前のページ

@@ -1,33 +1,12 @@
 <x-guest-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            小説投稿サイト
+            <x-flash-message status="session('status')" />
+        </h2>
+    </x-slot>
+
     <x-slot name="slot">
-
-        {{-- ヘッダー --}}
-        <header class="text-gray-600 body-font bg-gray-200 flex">
-            <div class="container mx-auto flex flex-wrap py-3 flex-col md:flex-row items-center md:flex-shrink-0">
-                <a class="flex font-medium items-center text-gray-900 mb-4 md:mb-0">
-                    <div class="flex-shrink flex items-center">
-                        <div class="w-20">
-                            <a href="{{ route('user.index') }}">
-                                <x-application-logo class="block h-20 w-auto fill-current text-gray-600" />
-                            </a>
-                        </div>
-                    </div>
-                    <span class="ml-3 text-4xl">小説投稿サイト</span>
-                </a>
-
-                <x-flash-message status="session('status')" />
-
-            </div>
-            <button onclick="location.href='/login'"
-                class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-300 rounded text-base md:mt-0">Button
-                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    class="w-4 h-4 ml-1" viewBox="0 0 24 24">
-                    <path d="M5 12h14M12 5l7 7-7 7"></path>
-                </svg>
-            </button>
-        </header>
-
-
         <section class="text-gray-600 body-font">
             <div class="container mx-auto flex px-3 py-24 text-left items-center">
                 @foreach ($novels as $novel)

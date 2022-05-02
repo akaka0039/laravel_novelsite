@@ -29,7 +29,6 @@ class WriterController extends Controller
             ->where('user_id', $user_id)
             ->paginate(5);
 
-
         return view(
             'writer.index',
             compact('novels', 'user_id')

@@ -1,50 +1,20 @@
 <x-guest-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            小説投稿サイト
+            <x-flash-message status="session('status')" />
+        </h2>
+    </x-slot>
+
+
+
+    {{-- body --}}
     <x-slot name="slot">
-
-        <div class="shadow-md">
-            <nav class="font-sans bg-white text-center flex justify-between mb-4 mx-auto container overflow-hidden ">
-                <div class="w-20">
-                    <a href="{{ route('user.index') }}">
-                        <x-application-logo class="block h-20 w-auto fill-current text-gray-600" />
-                    </a>
-                </div>
-                <ul class="text-sm text-gray-700 list-none p-0 flex items-center">
-                    <li><a href="#"
-                            class="inline-block py-2 px-3 text-gray-900 hover:text-gray-700 no-underline">Products</a>
-                    </li>
-                    <li><a href="#"
-                            class="inline-block py-2 px-3 text-gray-900 hover:text-gray-700 no-underline">Pricing</a>
-                    </li>
-                    <li class="pr-2"><a href="#"
-                            class="inline-block py-2 px-3 text-gray-900 hover:text-gray-700 no-underline">FAQs</a></li>
-                    <li class="pl-2 border-l"><a href="#"
-                            class="inline-block py-2 px-3 text-gray-900 hover:text-gray-700 no-underline">Log In</a>
-                    </li>
-                    <button class="bg-black hover:bg-text-gray-800 text-white ml-4 py-2 px-3">
-                        Sign Up
-                    </button>
-                </ul>
-            </nav>
-        </div>
-
-
-
-        {{-- <button onclick="location.href='/login'"
-                class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-300 rounded text-base md:mt-0">Button
-                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    class="w-4 h-4 ml-1" viewBox="0 0 24 24">
-                    <path d="M5 12h14M12 5l7 7-7 7"></path>
-                </svg>
-            </button> --}}
-
-
-
-
-        {{-- body --}}
         @foreach ($novels as $novel)
             <div class="container px-2 py-2 mx-auto items-center">
 
-                <div class="max-w-4xl px-10 my-3 py-3 bg-gray-100 rounded-lg shadow-md">
+                <div
+                    class="max-w-4xl px-10 my-3 py-3 bg-white rounded-lg shadow-md transition duration-500 ease-in-out hover:bg-green-100 transform hover:-translate-y-1 hover:scale-110">
                     <a href="{{ route('user.show', ['id' => $novel->novel_id]) }}">
                         <div class="flex justify-between items-center">
                             {{-- <span
@@ -61,18 +31,17 @@
                         <div class="flex justify-between items-center mt-4">
                             <div class="text-blue-600 hover:underline">Read more</div>
                             <div>
-                                <div class="flex items-center" href="#">
-                                    <h1 class="text-gray-700 font-bold">Khatab wedaa</h1>
-                                </div>
+                                {{-- <div class="flex items-center" href="#">
+                                    <h1 class="text-gray-700 font-bold">名前</h1>
+                                </div> --}}
                             </div>
                         </div>
                     </a>
                 </div>
-
             </div>
         @endforeach
 
-        <div class="px-5 mb-8">
+        <div class="px-20 mb-8">
             {{ $novels->links() }}
         </div>
 

@@ -35,4 +35,7 @@ Route::get('/read/{novel_id}/{page}', [
     'read'
 ])->name('user.read');
 
+
+Auth::routes();
+
 require __DIR__ . '/auth.php';

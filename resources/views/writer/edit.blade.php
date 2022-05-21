@@ -45,7 +45,7 @@
                                                     <label for="message"
                                                         class="leading-7 text-sm text-gray-600">小説概要</label>
                                                     <textarea id="message" name="novel_information"
-                                                        class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-y leading-6 transition-colors duration-200 ease-in-out">{{ $novel->novel_information }}</textarea>
+                                                        class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200  text-base outline-none text-gray-700 py-1 px-3 resize-y leading-6 transition-colors duration-200 ease-in-out h-64">{{ $novel->novel_information }}</textarea>
                                                 </div>
                                             </div>
 
@@ -54,15 +54,16 @@
                                                     <div class="relative">
                                                         <label for="message"
                                                             class="leading-7 text-sm text-gray-600">内容</label>
-                                                        <textarea id="message" name="episode"
+                                                        <textarea id="message" name="episode" onkeyup="ShowLength(value,inputlength)"
                                                             class="w-full h-64 transition duration-100 bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3  leading-6 resize-y ease-in-out">{{ $novel_info->episode }}</textarea>
+                                                        <p id="inputlength">0文字</p>
                                                     </div>
                                                 </div>
                                                 <input type="hidden" name="page" value="{{ $novel_info->page }}">
                                             @endforeach
 
                                             <div class="flex justify-center px-5">
-                                                <a href="/writer/show/{{ $novel->novel_id }}" button
+                                                <a href="/writer/show/{{ $novel->novel_id }}"
                                                     class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">戻る</button></a>
                                                 <button
                                                     class="ml-8 inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">編集する</button>
@@ -78,4 +79,10 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function ShowLength(str, resultid) {
+            document.getElementById(resultid).innerHTML = str.length + "文字";
+        }
+    </script>
 </x-app-layout>

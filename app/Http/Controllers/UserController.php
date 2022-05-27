@@ -2,14 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Models\novels;
-use App\Models\novel_info;
-use Illuminate\Foundation\Auth\User as AuthUser;
+
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use NovelInfo;
 
 class UserController extends Controller
 {
@@ -22,8 +17,7 @@ class UserController extends Controller
     // 小説一覧を表示する
     public function index()
     {
-        // $users = DB::table('user')
-        //     ->paginate(5);
+
 
         $novels = DB::table('novels')
             ->paginate(5);
@@ -127,28 +121,29 @@ class UserController extends Controller
 
         // 運営者のおすすめ
         if ($user_request == "1") {
-            // dd($user_request);
             $novels = DB::table('novels')
-                ->limit(3)
-                ->paginate(3);
+                ->whereIn('novel_id', [1, 2, 4])
+                ->paginate(5);
         }
         //  評価の高い順 
         else if ($user_request == "2") {
-            // dd($user_request);
+
             $novels = DB::table('novels')
-                ->limit(3)
-                ->paginate(3);
-        }  //  人気の作者順 
+                // 評価の高い順で降順（good_pointが多い小説がトップで表示されることになる）
+                ->orderBy('good_point', 'desc')
+                ->paginate(5);
+        }
+        //  人気の作者順 
         else if ($user_request == "3") {
             // dd($user_request);
             $novels = DB::table('novels')
-                ->limit(3)
-                ->paginate(3);
+                ->orderBy('user_point', 'desc')
+                ->paginate(5);
         }
         // ランダム 
         else {
             $novels = DB::table('novels')
-                ->limit(5)
+                ->inRandomOrder()
                 ->paginate(5);
         }
 

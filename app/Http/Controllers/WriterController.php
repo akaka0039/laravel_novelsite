@@ -125,6 +125,14 @@ class WriterController extends Controller
 
     public function editUpdate(Request $request)
     {
+
+        // 　バリエーション必要_小説名・エピソードがなかった場合
+        // $validator = $request->validate([       // <-- ここがバリデーション部分
+        //     'eω' => 'required|exists:users',
+        //     'password' => 'required|min:8',
+        // ]);
+
+
         // 編集
         try {
             DB::transaction(function ()  use ($request) {
@@ -228,12 +236,17 @@ class WriterController extends Controller
     public function edit(Request $request)
     {
 
+
+
+
         $user_id = Auth::id();
+
 
         $novels = DB::table('novels')
             ->where('user_id', $user_id)
             ->where('novel_id', $request->novel_id)
             ->get();
+
 
         if ($novels->isEmpty()) {
             return redirect()->route('writer.index')->with([

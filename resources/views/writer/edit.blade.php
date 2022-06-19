@@ -2,11 +2,6 @@
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             投稿小説編集
-            <div class="text-center text-5xl font-extrabold leading-none tracking-tight">
-                <span class="bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-blue-500">
-                    Hello world
-                </span>
-            </div>
 
         </h2>
     </x-slot>
@@ -56,7 +51,9 @@
                                                             class="leading-7 text-sm text-gray-600">内容</label>
                                                         <textarea id="message" name="episode" onkeyup="ShowLength(value,inputlength)"
                                                             class="w-full h-64 transition duration-100 bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3  leading-6 resize-y ease-in-out">{{ $novel_info->episode }}</textarea>
-                                                        <p id="inputlength">0文字</p>
+                                                        <p id="inputlength">0</p>
+
+
                                                     </div>
                                                 </div>
                                                 <input type="hidden" name="page" value="{{ $novel_info->page }}">
@@ -79,10 +76,9 @@
             </div>
         </div>
     </div>
+    <script language="JavaScript" type="text/JavaScript">function ShowLength( str ) {
+                                                                str=str.replace(/\n/g, ""); 
+                                                                document.getElementById("inputlength").innerHTML = "文字数"+ str.length ;
+                                                             }</script>
 
-    <script>
-        function ShowLength(str, resultid) {
-            document.getElementById(resultid).innerHTML = str.length + "文字";
-        }
-    </script>
 </x-app-layout>

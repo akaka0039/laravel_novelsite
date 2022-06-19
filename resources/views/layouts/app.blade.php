@@ -31,6 +31,11 @@
         <!-- Page Content -->
         <main>
             {{ $slot }}
+
+            <script language="JavaScript" type="text/JavaScript">function ShowLength( str ) {
+                            str=str.replace(/\n/g, ""); 
+                            document.getElementById("inputlength").innerHTML = ""+ str.length ;
+                         }</script>
         </main>
     </div>
 </body>

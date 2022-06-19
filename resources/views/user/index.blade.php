@@ -23,7 +23,7 @@
                             href="#">Design</a> --}}
                         </div>
                         <div class="truncate">
-                            <div class="text-2xl text-gray-700 font-bold hover:text-gray-600">
+                            <div class="text-2xl text-gray-700 font-bold hover:text-gray-600 truncate">
                                 {{ $novel->novel_title }}
                             </div>
                             <p class="mt-2 text-gray-600 truncate">{{ $novel->novel_information }}</p>

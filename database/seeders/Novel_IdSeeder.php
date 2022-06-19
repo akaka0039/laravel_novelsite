@@ -61,30 +61,14 @@ class Novel_IdSeeder extends Seeder
 
             [
                 'novel_id' => 3,
-                'page' => 1,
-                'subtitle' => "何度でも",
-                'episode' => "努力は勝つ",
-
-
-            ],
-
-            [
-                'novel_id' => 1,
-                'page' => 1,
-                'subtitle' => "何度でも",
-                'episode' => "努力は勝つ",
-
-
-            ],
-
-            [
-                'novel_id' => 1,
                 'page' => 2,
                 'subtitle' => "何度でも",
                 'episode' => "努力は勝つ",
 
 
             ],
+
+
 
             [
                 'novel_id' => 4,

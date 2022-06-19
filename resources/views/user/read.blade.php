@@ -24,7 +24,7 @@
                 <div class="container px-1 py-1 mx-auto items-center">
                     <div class="flex flex-around">
                         <p
-                            class="sm:tracking-tighter text-gray-900 text-lg mb-6 md:ml-4 xl:ml-64 py-5 px-14 text-left max-w-6xl xl:tracking-wide">
+                            class="sm:text-sm sm:tracking-tighter text-gray-900 md:text-lg xl:text-lg mb-6 md:ml-4 xl:text-center py-5 px-14 text-left max-w-6xl xl:tracking-wide">
                             {!! nl2br(htmlspecialchars($novel_infos->episode)) !!}
                         </p>
                     </div>

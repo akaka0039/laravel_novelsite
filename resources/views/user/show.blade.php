@@ -8,16 +8,16 @@
 
     <x-slot name="slot">
         <section class="text-gray-600 body-font">
-            <div class="container mx-auto  px-3 py-20 ">
+            <div class="container mx-auto px-3 py-20">
                 @foreach ($novels as $novel)
                     <div
-                        class="lg:flex-grow lg:pr-24 md:pr-16 flex flex-col md:items-start mb-16 md:mb-0 items-center truncate">
-                        <h1 class="sm:text-4xl text-3xl mb-4 font-medium text-gray-900 text-justify">
+                        class="lg:flex-grow lg:pr-24 md:pr-16 flex flex-col md:items-start mb-16 md:mb-0 sm:text-left sm:items-start truncate">
+                        <h1 class="sm:text-4xl text-3xl mb-4 font-medium text-gray-900 truncate text-center">
                             {{ $novel->novel_title }}
                         </h1>
-                        <p class="mb-4 leading-relaxed text-left truncate">{{ $novel->novel_information }}</p>
+                        <p class="mb-4 leading-relaxed text-center truncate">{{ $novel->novel_information }}</p>
 
-                        <p class="mb-8 pd leading-relaxed text-left">
+                        <p class="mb-8 pd leading-relaxed text-center">
                             -----------------------------------------------
                         </p>
 
@@ -30,8 +30,8 @@
                                         {{ $loop->iteration }}話：
                                     </div>
                                     <button type="submit"
-                                        class="inline-block  mr-16 w-3/4 text-gray-700
-                                        bg-gray-200 text-center border-0 py-2 px-16 hover:bg-gray-300 rounded
+                                        class="inline-block mr-8 text-gray-700
+                                        bg-gray-200 sm:items-center text-center border-0 py-2 px-8 hover:bg-gray-300 rounded
                                          truncate">{{ $novel_info->subtitle }}</button>
 
                                     <input type="hidden" name="page_read" value=2>

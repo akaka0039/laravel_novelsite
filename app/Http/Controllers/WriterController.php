@@ -126,7 +126,7 @@ class WriterController extends Controller
     public function editUpdate(Request $request)
     {
 
-        // 　バリエーション必要_小説名・エピソードがなかった場合
+        // バリエーション必要_小説名・エピソードがなかった場合
         // $validator = $request->validate([       // <-- ここがバリデーション部分
         //     'eω' => 'required|exists:users',
         //     'password' => 'required|min:8',
@@ -188,7 +188,7 @@ class WriterController extends Controller
         ]);
 
         return redirect()->route('writer.show', ['id' => $request->novel_id])->with([
-            'message' => '新規ページを追加投稿しました。',
+            'message' => '追加投稿しました。',
             'status' => 'info',
         ]);
     }

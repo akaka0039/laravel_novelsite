@@ -11,7 +11,7 @@
     {{-- body --}}
     <x-slot name="slot">
         @foreach ($novels as $novel)
-            <div class="container px-2 py-2 mx-auto items-center">
+            <div class="container px-2 py-2 mx-auto items-center min-h-full">
 
                 <div
                     class="max-w-4xl px-10 my-3 py-3 bg-white rounded-lg shadow-md transition duration-500 ease-in-out hover:bg-green-100 transform hover:-translate-y-1 hover:scale-110">

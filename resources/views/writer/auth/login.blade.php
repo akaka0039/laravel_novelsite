@@ -1,13 +1,16 @@
 <x-guest-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            ログイン
+        </h2>
+    </x-slot>
     <x-auth-card>
         <x-slot name="logo">
-            <div class="w-28">
+            {{-- <div class="w-28">
                 <a href="/">
                     <x-application-logo class="w-20 h-20 fill-current text-blue-500 border-2" />
                 </a>
-            </div>
-
-
+            </div> --}}
         </x-slot>
 
         <!-- Session Status -->

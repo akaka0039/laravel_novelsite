@@ -29,7 +29,6 @@ class WriterController extends Controller
             ->where('user_id', $user_id)
             ->paginate(5);
 
-
         return view(
             'writer.index',
             compact('novels', 'user_id')
@@ -126,6 +125,14 @@ class WriterController extends Controller
 
     public function editUpdate(Request $request)
     {
+
+        // バリエーション必要_小説名・エピソードがなかった場合
+        // $validator = $request->validate([       // <-- ここがバリデーション部分
+        //     'eω' => 'required|exists:users',
+        //     'password' => 'required|min:8',
+        // ]);
+
+
         // 編集
         try {
             DB::transaction(function ()  use ($request) {
@@ -181,7 +188,7 @@ class WriterController extends Controller
         ]);
 
         return redirect()->route('writer.show', ['id' => $request->novel_id])->with([
-            'message' => '新規ページを追加投稿しました。',
+            'message' => '追加投稿しました。',
             'status' => 'info',
         ]);
     }
@@ -229,12 +236,17 @@ class WriterController extends Controller
     public function edit(Request $request)
     {
 
+
+
+
         $user_id = Auth::id();
+
 
         $novels = DB::table('novels')
             ->where('user_id', $user_id)
             ->where('novel_id', $request->novel_id)
             ->get();
+
 
         if ($novels->isEmpty()) {
             return redirect()->route('writer.index')->with([

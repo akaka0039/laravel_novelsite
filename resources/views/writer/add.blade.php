@@ -2,11 +2,7 @@
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             投稿小説編集
-            <div class="text-center text-5xl font-extrabold leading-none tracking-tight">
-                <span class="bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-blue-500">
-                    Hello world
-                </span>
-            </div>
+
             <x-flash-message status="session('status')" />
         </h2>
     </x-slot>

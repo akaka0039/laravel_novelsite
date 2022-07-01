@@ -35,4 +35,14 @@ Route::get('/read/{novel_id}/{page}', [
     'read'
 ])->name('user.read');
 
+// 小説を検索する
+Route::get('/search/{user_request}', [
+    UserController::class,
+    'search'
+])->name('user.search');
+
+
+
+Auth::routes();
+
 require __DIR__ . '/auth.php';

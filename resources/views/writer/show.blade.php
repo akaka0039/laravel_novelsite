@@ -2,12 +2,6 @@
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             投稿小説一覧
-            <div class="text-center text-5xl font-extrabold leading-none tracking-tight">
-                <span class="bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-blue-500">
-                    Hello world
-
-                </span>
-            </div>
         </h2>
     </x-slot>
 
@@ -79,7 +73,7 @@
 
                                                     <td class="md:px-4 py-3">
                                                         <form method="get"
-                                                            action="{{ route('writer.edit', ['id' => $novel->novel_id]) }}">
+                                                            action="{{ route('writer.edit', ['id' => $novel->novel_id, 'page' => $novel_info->page]) }}">
                                                             <button type="submit"
                                                                 class="text-white bg-green-400 border-0 py-2 px-5 text-center focus:outline-none hover:bg-green-600 rounded">
                                                                 edit</button>
@@ -92,15 +86,18 @@
 
                                                     <td class="md:px-4 py-3">
                                                         <form method="post"
-                                                            action="{{ route('writer.page.delete', ['novel_id' => $novel->novel_id]) }}">
+                                                            action="{{ route('writer.page.delete', ['novel_id' => $novel->novel_id, 'page' => $novel_info->page]) }}">
                                                             @csrf
+                                                            <input type="hidden" name="novel_id"
+                                                                value="{{ $novel->novel_id }}">
                                                             <input type="hidden" name="page"
                                                                 value="{{ $novel_info->page }}">
 
                                                             <button type="submit" onclick="deletePost(this)"
                                                                 class=" text-white bg-red-400 border-0 py-2 px-5 focus:outline-none hover:bg-red-600 rounded">Delete</button>
+                                                        </form>
                                                     </td>
-                                                    </form>
+
                                                 </tr>
                                             @endforeach
                                         @endforeach

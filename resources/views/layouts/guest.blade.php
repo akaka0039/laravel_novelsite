@@ -12,17 +12,35 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ asset('css/app.css?2203011') }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css?2203012') }}">
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
 
-<body>
+
+<body class="font-sans antialiased">
+    <div class="min-h-screen bg-gray-100">
+        @include('layouts.guestnavigation')
+
+        <!-- Page Heading -->
+        <header class="bg-white shadow">
+            <div class="mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                {{ $header }}
+            </div>
+        </header>
+        <!-- Page Content -->
+        <main>
+            {{ $slot }}
+        </main>
+    </div>
+</body>
+
+{{-- <body>
 
     <div class="font-sans  antialiased">
         {{ $slot }}
     </div>
-</body>
+</body> --}}
 
 </html>

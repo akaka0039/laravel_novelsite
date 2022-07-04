@@ -4,10 +4,10 @@
             小説投稿サイト
             <x-flash-message status="session('status')" />
         </h2>
-        <form method="get" action="{{ route('user.search', ['user_request' => 1]) }}">
+        <form method="get" action="{{ route('user.search', ['user_request' => 4]) }}">
             <div class="text-right leading-tight">
                 検索
-                <input type="text">
+                <input type="text" name="keyword">
             </div>
         </form>
     </x-slot>
@@ -15,7 +15,6 @@
     {{-- body --}}
     <x-slot name="slot">
         <div class="flex items-center rounded bg-grey-light w-auto p-2">
-
             <div class="text-sm mt-2 grid grid-cols-4 divide-x divide-gray-400 ">
                 <a href="{{ route('user.search', ['user_request' => 1]) }}">
                     <div
@@ -34,9 +33,8 @@
                 <a href="{{ route('user.search', ['user_request' => 3]) }}">
                     <div
                         class="bg-green-100 p-4 rounded mt-1 border-b-2 border-grey-300 cursor-pointer hover:bg-grey-lighter">
-                        人気の<br>
-                        作者
-
+                        最新の<br>
+                        投稿
                     </div>
                 </a>
                 <a href="{{ route('user.search', ['user_request' => 0]) }}">
@@ -46,13 +44,12 @@
                         だむ
                     </div>
                 </a>
-                <p class="mt-3 text-grey-dark w-auto">ここに何で検索をされたかをお知らせします</p>
             </div>
-        </div>
 
+        </div>
+        <p class="mt-3 text-grey-dark w-auto">【{{ $message_search }}】で検索しています</p>
         @foreach ($novels as $novel)
             <div class="container px-2 py-2 mx-auto items-center">
-
                 <div
                     class="max-w-4xl px-10 my-3 py-3 bg-white rounded-lg shadow-md transition duration-500 ease-in-out hover:bg-green-100 transform hover:-translate-y-1 hover:scale-110">
                     <a href="{{ route('user.show', ['id' => $novel->novel_id]) }}">
@@ -80,10 +77,8 @@
                 </div>
             </div>
         @endforeach
-
         <div class="px-20 mb-8">
             {{ $novels->links() }}
         </div>
-
     </x-slot>
 </x-guest-layout>

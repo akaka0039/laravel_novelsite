@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Models\novels;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -124,6 +124,8 @@ class UserController extends Controller
             $novels = DB::table('novels')
                 ->whereIn('novel_id', [1, 2, 4])
                 ->paginate(5);
+
+            $message_search = "運営者のおすすめ";
         }
         //  評価の高い順 
         else if ($user_request == "2") {
@@ -132,55 +134,48 @@ class UserController extends Controller
                 // 評価の高い順で降順（good_pointが多い小説がトップで表示されることになる）
                 ->orderBy('good_point', 'desc')
                 ->paginate(5);
+
+            $message_search = "評価の高い";
         }
-        //  人気の作者順 
+        //  最新の投稿順 
         else if ($user_request == "3") {
             // dd($user_request);
             $novels = DB::table('novels')
-                ->orderBy('user_point', 'desc')
+                ->orderBy('updated_at', 'desc')
+                ->orderBy('created_at', 'desc')
                 ->paginate(5);
+
+            $message_search = "最新の投稿";
+        }
+        //  ユーザが入力をした場合
+        else if ($user_request == "4") {
+
+            $keyword = $request->input('keyword');
+            $query = novels::query();
+
+            if (!empty($keyword)) {
+                $query->where('novel_title', 'LIKE', "%{$keyword}%")
+                    ->orWhere('novel_information', 'LIKE', "%{$keyword}%");
+            }
+
+            $novels = $query->orderByRaw('updated_at - created_at DESC')
+                ->paginate(5);
+            $message_search = $keyword;
         }
         // ランダム 
         else {
             $novels = DB::table('novels')
                 ->inRandomOrder()
                 ->paginate(5);
+
+            $message_search = "ランダム";
         }
 
-        // Request $user_request
-        //         // ユーザー一覧をページネートで取得
-        //         $users = User::paginate(20);
-
-        // 　　     // 検索フォームで入力された値を取得する
-        //         $search = $request->input('search');
-
-        //         // クエリビルダ
-        //         $query = User::query();
-
-        //        // もし検索フォームにキーワードが入力されたら
-        //         if ($search) {
-
-        //             // 全角スペースを半角に変換
-        //             $spaceConversion = mb_convert_kana($search, 's');
-
-        //             // 単語を半角スペースで区切り、配列にする（例："山田 翔" → ["山田", "翔"]）
-        //             $wordArraySearched = preg_split('/[\s,]+/', $spaceConversion, -1, PREG_SPLIT_NO_EMPTY);
-
-
-        //             // 単語をループで回し、ユーザーネームと部分一致するものがあれば、$queryとして保持される
-        //             foreach($wordArraySearched as $value) {
-        //                 $query->where('name', 'like', '%'.$value.'%');
-        //             }
-
-        // 　　　　// 上記で取得した$queryをページネートにし、変数$usersに代入
-        //             $users = $query->paginate(20);
-
-        //         }
 
         // ビューにusersとsearchを変数として渡す
         return view(
             'user.search',
-            compact('novels')
+            compact('novels', 'message_search')
         );
     }
 }

@@ -41,6 +41,10 @@ Route::get('/search/{user_request}', [
     'search'
 ])->name('user.search');
 
+Route::get('/welcome', [
+    UserController::class,
+    'welcome'
+])->name('welcome');
 
 
 Auth::routes();

@@ -14,10 +14,20 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function welcome()
+    {
+        return view(
+            'welcome'
+        );
+    }
+
+
+
+
     // 小説一覧を表示する
     public function index()
     {
-
 
         $novels = DB::table('novels')
             ->paginate(5);
@@ -118,6 +128,9 @@ class UserController extends Controller
 
     public function search(Request $request, $user_request)
     {
+
+        // どのように検索したのかを表示します
+        $message_search = "";
 
         // 運営者のおすすめ
         if ($user_request == "1") {

@@ -21,4 +21,9 @@ class novel_info extends Model
         //　複数持てる
         return $this->belongsTo(novels::class);
     }
+
+    // public function user()
+    // {
+    //     return $this->belongsTo(users::class);
+    // }
 }

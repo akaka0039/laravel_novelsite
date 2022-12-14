@@ -41,8 +41,6 @@
                 </div>
             </div>
 
-
-
             <div class="flex justify-center">
                 {{-- ホーム画面へ --}}
                 <a href="/" button

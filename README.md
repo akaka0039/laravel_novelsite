@@ -1,3 +1,9 @@
+# Novel_site
+#### Video Demo:  <URL HERE>
+#### Description:
+This is a website for that people who like upload their own novel to the internet.
+The visiters to this website can read the novels the people upload.
+
 # 小説投稿サイト
 
 ## 概要
